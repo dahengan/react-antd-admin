@@ -1,0 +1,30 @@
+.Layout_Header {
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid #f0f2f5;
+
+  position: relative;
+
+  .Layout_Header_left_box {
+    height: 100%;
+    position: absolute;
+    left: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .Layout_Header_left_box_logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .Layout_Header_left_box_tex {
+      font-size: 20px;
+      font-weight: 700;
+      margin-left: 12px;
+    }
+  }
+}

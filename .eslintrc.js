@@ -1,0 +1,336 @@
+// module.exports = {
+//   parserOptions: {
+//     ecmaVersion: 'latest', // 使用最新的 ECMAScript 版本
+//     sourceType: 'module' // 使用模块化的文件结构
+//   },
+//   env: {
+//     browser: true, // 启用浏览器环境
+//     es2021: true, // 使用 ES2021 版本的特性
+//     commonjs: true // 启用 CommonJS 模块规范
+//   },
+//   extends: [
+//     'eslint:recommended', // 使用 ESLint 推荐的基本规则
+//     'plugin:react/recommended' // 使用 react 插件推荐的规则
+//   ],
+//   plugins: ['react'], // 启用 react 插件
+//   rules: {
+//     // quotes: ['error', 'single'], // 强制使用单引号
+//     'react/react-in-jsx-scope': 'off',
+//     // 'react/jsx-uses-react': 'off',
+//     'react/jsx-uses-react': 2,
+//     // 'no-unused-vars': 0,
+//     'arrow-spacing': [
+//       2,
+//       {
+//         before: true,
+//         after: true
+//       }
+//     ],
+//     'block-spacing': [2, 'always'],
+//     'brace-style': [
+//       2,
+//       '1tbs',
+//       {
+//         allowSingleLine: true
+//       }
+//     ],
+//     camelcase: [
+//       0,
+//       {
+//         properties: 'always'
+//       }
+//     ],
+//     'comma-dangle': [2, 'never'],
+//     'comma-spacing': [
+//       2,
+//       {
+//         before: false,
+//         after: true
+//       }
+//     ],
+//     'comma-style': [2, 'last'],
+//     'constructor-super': 2,
+//     curly: [2, 'multi-line'],
+//     'dot-location': [2, 'property'],
+//     'eol-last': 2,
+//     eqeqeq: ['error', 'always', { null: 'ignore' }],
+//     'generator-star-spacing': [
+//       2,
+//       {
+//         before: true,
+//         after: true
+//       }
+//     ],
+//     'handle-callback-err': [2, '^(err|error)$'],
+//     indent: [
+//       2,
+//       2,
+//       {
+//         SwitchCase: 1
+//       }
+//     ],
+//     'jsx-quotes': [2, 'prefer-single'],
+//     'key-spacing': [
+//       2,
+//       {
+//         beforeColon: false,
+//         afterColon: true
+//       }
+//     ],
+//     'keyword-spacing': [
+//       2,
+//       {
+//         before: true,
+//         after: true
+//       }
+//     ],
+//     'new-cap': [
+//       2,
+//       {
+//         newIsCap: true,
+//         capIsNew: false
+//       }
+//     ],
+//     'new-parens': 2,
+//     'no-array-constructor': 2,
+//     'no-caller': 2,
+//     'no-console': 'off',
+//     'no-class-assign': 2,
+//     'no-cond-assign': 2,
+//     'no-const-assign': 2,
+//     'no-control-regex': 0,
+//     'no-delete-var': 2,
+//     'no-dupe-args': 2,
+//     'no-dupe-class-members': 2,
+//     'no-dupe-keys': 2,
+//     'no-duplicate-case': 2,
+//     'no-empty-character-class': 2,
+//     'no-empty-pattern': 2,
+//     'no-eval': 0,
+//     'no-ex-assign': 2,
+//     'no-extend-native': 2,
+//     'no-extra-bind': 2,
+//     'no-extra-boolean-cast': 2,
+//     'no-extra-parens': [2, 'functions'],
+//     'no-fallthrough': 2,
+//     'no-floating-decimal': 2,
+//     'no-func-assign': 2,
+//     'no-implied-eval': 2,
+//     'no-inner-declarations': [2, 'functions'],
+//     'no-invalid-regexp': 2,
+//     'no-irregular-whitespace': 2,
+//     'no-iterator': 2,
+//     'no-label-var': 2,
+//     'no-labels': [
+//       2,
+//       {
+//         allowLoop: false,
+//         allowSwitch: false
+//       }
+//     ],
+//     'no-lone-blocks': 2,
+//     'no-mixed-spaces-and-tabs': 2,
+//     'no-multi-spaces': 2,
+//     'no-multi-str': 2,
+//     'no-multiple-empty-lines': [
+//       2,
+//       {
+//         max: 1
+//       }
+//     ],
+//     'no-native-reassign': 2,
+//     'no-negated-in-lhs': 2,
+//     'no-new-object': 2,
+//     'no-new-require': 2,
+//     'no-new-symbol': 2,
+//     'no-new-wrappers': 2,
+//     'no-obj-calls': 2,
+//     'no-octal': 2,
+//     'no-octal-escape': 2,
+//     'no-path-concat': 2,
+//     'no-proto': 2,
+//     'no-redeclare': 2,
+//     'no-regex-spaces': 2,
+//     'no-return-assign': [2, 'except-parens'],
+//     'no-self-assign': 2,
+//     'no-self-compare': 2,
+//     'no-sequences': 2,
+//     'no-shadow-restricted-names': 2,
+//     'no-spaced-func': 2,
+//     'no-sparse-arrays': 2,
+//     'no-this-before-super': 2,
+//     'no-throw-literal': 2,
+//     'no-trailing-spaces': 2,
+//     'no-undef': 2,
+//     'no-undef-init': 2,
+//     'no-unexpected-multiline': 2,
+//     'no-unmodified-loop-condition': 2,
+//     'no-unneeded-ternary': [
+//       2,
+//       {
+//         defaultAssignment: false
+//       }
+//     ],
+//     'no-unreachable': 2,
+//     'no-unsafe-finally': 2,
+//     'no-unused-vars': [
+//       2,
+//       {
+//         vars: 'all',
+//         args: 'none'
+//       }
+//     ],
+//     'no-useless-call': 2,
+//     'no-useless-computed-key': 2,
+//     'no-useless-constructor': 2,
+//     'no-useless-escape': 0,
+//     'no-whitespace-before-property': 2,
+//     'no-with': 2,
+//     'one-var': [
+//       2,
+//       {
+//         initialized: 'never'
+//       }
+//     ],
+//     'operator-linebreak': [
+//       2,
+//       'after',
+//       {
+//         overrides: {
+//           '?': 'before',
+//           ':': 'before'
+//         }
+//       }
+//     ],
+//     'padded-blocks': [2, 'never'],
+//     quotes: [
+//       2,
+//       'single',
+//       {
+//         avoidEscape: true,
+//         allowTemplateLiterals: true
+//       }
+//     ],
+//     semi: [2, 'never'],
+//     'semi-spacing': [
+//       2,
+//       {
+//         before: false,
+//         after: true
+//       }
+//     ],
+//     'space-before-blocks': [2, 'always'],
+//     'space-before-function-paren': ['error', 'never'],
+//     'space-in-parens': [2, 'never'],
+//     'space-infix-ops': 2,
+//     'space-unary-ops': [
+//       2,
+//       {
+//         words: true,
+//         nonwords: false
+//       }
+//     ],
+//     'spaced-comment': [
+//       2,
+//       'always',
+//       {
+//         markers: ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
+//       }
+//     ],
+//     'template-curly-spacing': [2, 'never'],
+//     'use-isnan': 2,
+//     'valid-typeof': 2,
+//     'wrap-iife': [2, 'any'],
+//     'yield-star-spacing': [2, 'both'],
+//     yoda: [2, 'never'],
+//     'prefer-const': 0,
+//     'object-curly-spacing': [
+//       2,
+//       'always',
+//       {
+//         objectsInObjects: false
+//       }
+//     ],
+//     'array-bracket-spacing': [2, 'never']
+//   }
+// }
+
+module.exports = {
+  parser: '@babel/eslint-parser',
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  plugins: ['react'],
+  rules: {
+    // 'prettier/prettier': 0, // 关闭Vscode的prettier验证(防止vscode的prettier冲突！！！！！！)
+    semi: 0, // 行末分号，根据编码习惯选择添加，这里配置的不加分号
+    'no-console': 0,
+    'comma-dangle': ['error', 'never'], // {}末尾逗号关闭
+    'max-len': 0,
+    'space-before-function-paren': [0, 'always'],
+    'no-unused-expressions': [
+      0,
+      {
+        allowShortCircuit: true,
+        allowTernary: true
+      }
+    ],
+    'arrow-body-style': [0, 'never'],
+    'func-names': 0,
+    'prefer-const': 0,
+    'no-extend-native': 0,
+    'no-param-reassign': 0,
+    'no-restricted-syntax': 0,
+    'no-eval': 0,
+    'no-continue': 0,
+    'no-unused-vars': [
+      0,
+      {
+        ignoreRestSiblings: true
+      }
+    ],
+    'no-underscore-dangle': 0,
+    'global-require': 0,
+    'import/no-extraneous-dependencies': 0,
+    'import/prefer-default-export': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
+    // react
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 2,
+    'react/jsx-first-prop-new-line': 0,
+    'react/jsx-filename-extension': 0,
+    'react/jsx-no-bind': 0,
+    'react/no-array-index-key': 0,
+    'react/require-default-props': 0,
+    'react/forbid-prop-types': 0,
+    'react/no-string-refs': 0,
+    'react/no-find-dom-node': 0,
+    'react/no-danger': 0,
+    'react/prop-types': 0,
+    'react/display-name': 0,
+    'react/no-deprecated': 0,
+    'react/no-direct-mutation-state': 0,
+    'jsx-a11y/href-no-hash': 0,
+    'jsx-a11y/no-static-element-interactions': 0
+  },
+  parserOptions: {
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    ecmaVersion: 8,
+    requireConfigFile: false,
+    ecmaFeatures: {
+      jsx: true,
+      experimentalObjectRestSpread: true
+    },
+    babelOptions: {
+      presets: ['@babel/preset-react']
+    }
+  },
+  settings: {
+    'import/resolver': 'node'
+  },
+  env: {
+    browser: true,
+    node: true,
+    es6: true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "jsxBracketSameLine": false,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "disableLanguages": [
+    "react"
+  ],
+  "htmlWhitespaceSensitivity": "ignore",
+  "trailingComma": "none",
+  "arrowParens": "avoid"
+}
