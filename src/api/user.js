@@ -23,3 +23,12 @@ export function getCaptchaId() {
     method: 'get'
   })
 }
+
+// 获取用户功能菜单
+export function getMenu(params) {
+  return request({
+    url: oam + '/user/functions',
+    method: 'get',
+    params
+  })
+}

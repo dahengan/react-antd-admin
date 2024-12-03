@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { setToken, removeToken } from '@/utils/auth'
-import { checkLocalStorage, setLocalStorage } from '@/utils/storage'
 import { login, getInfo } from '@/api/user'
 import JSEncrypt from 'jsencrypt'
 
@@ -29,19 +28,12 @@ const loginAsync = createAsyncThunk('loginAsync', userInfo => {
         const data = response
 
         if (data.code === 1) {
-          if (checkLocalStorage) {
-            setLocalStorage('token', data.data.access_token)
-          } else {
-            setToken(data.data.access_token)
-          }
-          setLocalStorage('certificate', 'valid')
+          setToken(data.data.access_token)
         }
 
         if (data.code === '40317') {
           // 证书过期
           removeToken('token')
-
-          setLocalStorage('certificate', 'invalid')
         }
 
         resolve(data)
@@ -68,9 +60,6 @@ const userSlice = createSlice({
     builder.addCase(loginAsync.fulfilled, (state, action) => {
       // 保存token
       state.token = action.payload.data.access_token
-    })
-    builder.addCase(loginAsync.rejected, (state, action) => {
-      // console.log(state, action, 'rejected')
     })
   }
 })

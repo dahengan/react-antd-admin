@@ -8,10 +8,12 @@ import storage from 'redux-persist/lib/storage'
 
 // 子模块reducers
 import user from './modules/user.js'
+import permission from './modules/permission.js'
 
 // 创建reducer(合并拆分的reducer)
 const rootReducer = combineReducers({
-  user
+  user,
+  permission
 })
 
 // 持久化配置
