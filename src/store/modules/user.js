@@ -22,25 +22,33 @@ const loginAsync = createAsyncThunk('loginAsync', userInfo => {
       captcha: captcha.trim(),
       captchaId: captchaId
     }
-
     login(params)
       .then(response => {
         const data = response
-
         if (data.code === 1) {
           setToken(data.data.access_token)
         }
-
         if (data.code === '40317') {
           // 证书过期
           removeToken('token')
         }
-
         resolve(data)
       })
       .catch(error => {
         reject(error)
       })
+  })
+})
+
+// user reset
+const resetTokenAsync = createAsyncThunk('resetTokenAsync', () => {
+  return new Promise(resolve => {
+    // 清除所有localStorage
+    window.localStorage.clear()
+    // 清除token
+    removeToken()
+
+    resolve()
   })
 })
 
@@ -52,14 +60,16 @@ const userSlice = createSlice({
     certivalid: true
   },
   reducers: {
-    SET_TOKEN: (state, action) => {
-      console.log(action)
-    }
+    SET_TOKEN: (state, action) => {}
   },
   extraReducers(builder) {
     builder.addCase(loginAsync.fulfilled, (state, action) => {
       // 保存token
       state.token = action.payload.data.access_token
+    })
+    builder.addCase(resetTokenAsync.fulfilled, (state, action) => {
+      // 清除token
+      state.token = ''
     })
   }
 })
@@ -67,6 +77,6 @@ const userSlice = createSlice({
 const { SET_TOKEN } = userSlice.actions
 
 // 按需导出actionCreater
-export { SET_TOKEN, loginAsync }
+export { SET_TOKEN, loginAsync, resetTokenAsync }
 
 export default userSlice.reducer

@@ -5,10 +5,7 @@ import './App.scss'
 
 function App() {
 
-  const pages = useRoutes(constantRoutes)
-
-  // console.log(transformRoutes(constantRoutes), 'transformRoutes(constantRoutes)');
-
+  const pages = useRoutes(transformRoutes(constantRoutes))
 
   return (
     <div className="app app-wrapper">

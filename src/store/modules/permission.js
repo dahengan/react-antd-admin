@@ -9,13 +9,14 @@ const permissionSlice = createSlice({
     asyncRoutes: []
   },
   reducers: {
-    SET_ROUTES: (state, action) => {
-      console.log(action)
-    }
+    SET_ROUTES: (state, action) => {}
   },
   extraReducers(builder) {
     builder.addCase(getMenuAsync.fulfilled, (state, action) => {
-      state.routes = constantRoutes.concat(action.payload)
+      for (let i = 0; i < action.payload.length; i++) {
+        state.routes = constantRoutes.concat(action.payload[i].children)
+        state.asyncRoutes = action.payload[i].children
+      }
     })
   }
 })
@@ -28,9 +29,6 @@ const getMenuAsync = createAsyncThunk('getMenuAsync', () => {
         const data = response.data
         if (!data) {
           reject('验证失败，请重新登录。')
-        }
-        for (let i = 0; i < data.length; i++) {
-          console.log(data)
         }
         resolve(data)
       })

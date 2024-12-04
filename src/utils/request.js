@@ -16,7 +16,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getState().user.token) {
-      config.headers['Authorization'] = 'Bearer ' + (getLocalStorage('token') || getToken())
+      config.headers['Authorization'] = 'Bearer ' + getToken()
     }
     if (config.method === 'get') {
       // 如果是get请求，且params是数组类型如arr=[1,2]，则转换成arr=1&arr=2
@@ -28,7 +28,6 @@ service.interceptors.request.use(
   },
   error => {
     // for debug
-    console.log('request: ', error)
     return Promise.reject(error)
   }
 )
@@ -48,7 +47,10 @@ service.interceptors.response.use(
       return res
     }
     // 登录接口服务请求单独判断(因为返回的数据结构和其他接口不一样)
-    if (response.config.url === window.api + '/sso/oauth/token' && status === 200) {
+    if (
+      response.config.url === process.env.REACT_APP_BASE_API + '/sso/oauth/token' &&
+      status === 200
+    ) {
       return response
     }
 
@@ -62,18 +64,12 @@ service.interceptors.response.use(
   },
   error => {
     // for debug
-    console.log('response: ', error)
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          // debugger
           // 删除令牌，进入登录页面重新登录
-          store.dispatch('user/resetToken').then(() => {
-            message.error('授权已过期，请重新登录！', 5000)
-            setTimeout(() => {
-              location.reload()
-            }, 800)
-          })
+          message.error('服务器错误')
+
           break
         case 500:
           message.error('服务器错误')

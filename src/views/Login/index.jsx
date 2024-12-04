@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react'
 import './index.scss'
 import { Form, Input, Row, Col, Button } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { loginAsync } from '@/store/modules/user'
-import { getCaptchaId, login } from '@/api/user'
+import { getCaptchaId } from '@/api/user'
 import { message } from 'antd'
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login() {
 
-  useSelector((state) => {
-    // console.log(state)
-  })
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -24,7 +23,9 @@ export default function Login() {
     captcha: '',
     captchaId: ''
   })
+
   const [imgUrl, setImgUrl] = useState('')
+
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -38,24 +39,24 @@ export default function Login() {
   // 登录
   function handleLogin() {
     form.validateFields().then(() => {
+
       setLoading(true)
 
       dispatch(loginAsync(formData)).then(data => {
-        if (data.code === 1) {
-          // this.$router.push(window.configRoute)
+        if (data.payload.code === 1) {
+          // 登录成功跳转首页
+          console.log('登录成功跳转首页')
+          navigate('/home')
         } else {
           message.error(data.message)
           getCaptchaIdFn()
         }
-
         setLoading(false)
       })
         .catch(() => {
           setLoading(false)
           getCaptchaIdFn()
         })
-
-
     }).catch((errorInfo) => {
       return errorInfo
     })

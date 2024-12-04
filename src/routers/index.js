@@ -7,11 +7,9 @@ import { Navigate } from 'react-router-dom'
 function lazyLoad(factory) {
   const Module = lazy(factory)
   return (
-    <Auth>
-      <Suspense fallback={<Loading />}>
-        <Module />
-      </Suspense>
-    </Auth>
+    <Suspense fallback={<Loading />}>
+      <Module />
+    </Suspense>
   )
 }
 
@@ -31,7 +29,6 @@ export const constantRoutes = [
         path: '/personal-info',
         name: 'PersonalInfo',
         element: lazyLoad(() => import('@/views/PersonalInfo')),
-        hidden: true,
         meta: { title: '个人中心' }
       }
     ]
@@ -44,6 +41,7 @@ export const constantRoutes = [
   }
 ]
 
+// 路由配置列表数据转换
 const authLoad = (element, meta = {}, path = '') => {
   return (
     <Auth meta={meta} path={path}>
@@ -52,26 +50,21 @@ const authLoad = (element, meta = {}, path = '') => {
   )
 }
 
-// 路由配置列表数据转换
+function treePlatform(data) {
+  const hasChildren = data.children && data.children.length > 0
+  return {
+    path: data.path,
+    name: data.name,
+    element: authLoad(data.element, data.meta, data.path),
+    meta: data.meta,
+    children: hasChildren ? data.children.map(i => treePlatform(i)) : []
+  }
+}
+
 export const transformRoutes = routes => {
   const list = []
   routes.forEach(route => {
-    const obj = { ...route }
-    if (obj.redirect) {
-      obj.element = <Navigate to={obj.redirect} replace={true} />
-    }
-
-    if (obj.element) {
-      obj.element = authLoad(obj.element, obj.meta, obj.path)
-    }
-
-    delete obj.redirect
-    delete obj.meta
-
-    if (obj.children) {
-      obj.children = transformRoutes(obj.children)
-    }
-    list.push(obj)
+    list.push(treePlatform(route))
   })
   return list
 }
