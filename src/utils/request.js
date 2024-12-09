@@ -1,8 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
 import { store } from '@/store/index'
-import { getLocalStorage } from '@/utils/storage'
-import { getToken } from '@/utils/auth'
 import { message } from 'antd'
 
 // 创建axios实例
@@ -16,7 +14,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getState().user.token) {
-      config.headers['Authorization'] = 'Bearer ' + getToken()
+      config.headers['Authorization'] = 'Bearer ' + store.getState().user.token
     }
     if (config.method === 'get') {
       // 如果是get请求，且params是数组类型如arr=[1,2]，则转换成arr=1&arr=2

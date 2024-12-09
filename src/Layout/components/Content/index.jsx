@@ -1,6 +1,6 @@
 import React from 'react'
 import { useOutlet } from 'react-router-dom';
-
+import TagsView from './components/TagsView'
 import './index.scss'
 
 export default function Content() {
@@ -9,7 +9,9 @@ export default function Content() {
 
   return (
     <div className='Layout_Content'>
-      {outlet}
+      <TagsView />
+
+      <div className='app-main'>{outlet}</div>
     </div>
   )
 }

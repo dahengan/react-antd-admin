@@ -1,0 +1,22 @@
+.home {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-image: url('../../assets/img/home_bj.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 3px;
+  position: relative;
+
+  .title_word {
+    position: absolute;
+    font-size: 34px;
+    font-weight: 600;
+    top: 30%;
+    left: 10%;
+    .title {
+      color: #2b71fc;
+    }
+  }
+}

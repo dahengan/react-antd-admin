@@ -3,6 +3,7 @@ import { getToken } from '@/utils/auth'
 import { useNavigate, useLocation } from "react-router-dom";
 import { getMenuAsync } from '@/store/modules/permission'
 import { useDispatch, useSelector } from 'react-redux'
+import { store } from '@/store/index'
 import { message } from 'antd'
 
 export default function Auth(props) {
@@ -15,7 +16,7 @@ export default function Auth(props) {
   const { meta, path } = props
 
   // 确定用户是否已登录
-  const hasToken = getToken()
+  const hasToken = store.getState().user.token
 
   // 获取动态路由
   const hasAsyncRoutes = useSelector((state) => { return state.permission.asyncRoutes })
@@ -35,7 +36,11 @@ export default function Auth(props) {
         // 判断是否存在动态路由
         if (hasAsyncRoutes.length === 0) {
           dispatch(getMenuAsync()).then(data => {
-            navigate(location.pathname)
+            if (path === '/') {
+              navigate('/home')
+            } else {
+              navigate(location.pathname)
+            }
           }).catch(() => {
             message.error('获取用户信息失败！')
             navigate('/login')
