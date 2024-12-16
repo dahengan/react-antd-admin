@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { getToken } from '@/utils/auth'
 import { useNavigate, useLocation } from "react-router-dom";
 import { getMenuAsync } from '@/store/modules/permission'
 import { useDispatch, useSelector } from 'react-redux'
 import { store } from '@/store/index'
 import { message } from 'antd'
 
+// 鉴权组件
 export default function Auth(props) {
   const dispatch = useDispatch()
 
@@ -20,6 +20,8 @@ export default function Auth(props) {
 
   // 获取动态路由
   const hasAsyncRoutes = useSelector((state) => { return state.permission.asyncRoutes })
+
+
 
   // 设置标题z
   if (meta && meta.title) {

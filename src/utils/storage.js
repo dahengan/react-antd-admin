@@ -36,3 +36,29 @@ export function setLocalStorage(name, data) {
     window.localStorage.setItem(name, JSON.stringify(data))
   }
 }
+
+/**
+ * 设置sessionStorage
+ * @param name 传入的key
+ * @param data 传入的value
+ */
+export function setSessionStorage(name, data) {
+  if (data) {
+    window.sessionStorage.setItem(name, JSON.stringify(data))
+  }
+}
+
+/**
+ * 获取sessionStorage
+ * @param name 传入的key
+ * @returns {Object}
+ */
+export function getSessionStorage(name) {
+  if (window.sessionStorage.getItem(name)) {
+    try {
+      return JSON.parse(window.sessionStorage.getItem(name))
+    } catch (error) {
+      return window.sessionStorage.getItem(name)
+    }
+  }
+}

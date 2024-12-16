@@ -9,3 +9,13 @@ body,
 div {
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  background-color: #dee1e7;
+  border-radius: 2px;
+}

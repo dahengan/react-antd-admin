@@ -3,4 +3,36 @@
   height: 32px;
   background: #fff;
   display: flex;
+
+  .tags_view_item {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    color: #525b66;
+    background: #fff;
+    padding: 0 12px;
+    font-size: 14px;
+    transition: 0.5s linear;
+
+    border: none !important;
+    border-radius: 0 !important;
+    margin-inline-end: 0 !important;
+
+    .icon_close {
+      margin-left: 5px;
+    }
+  }
+
+  .active {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: #2b71fc;
+    color: #fff;
+    &:hover {
+      background-color: #4785ff;
+    }
+  }
 }

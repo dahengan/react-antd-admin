@@ -10,12 +10,14 @@ import storage from 'redux-persist/lib/storage'
 import user from './modules/user.js'
 import permission from './modules/permission.js'
 import app from './modules/app.js'
+import tagsView from './modules/tagsView.js'
 
 // 创建reducer(合并拆分的reducer)
 const rootReducer = combineReducers({
   user,
   permission,
-  app
+  app,
+  tagsView
 })
 
 // 持久化配置

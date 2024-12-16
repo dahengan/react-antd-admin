@@ -3,6 +3,7 @@ import { getMenu } from '@/api/user'
 import { constantRoutes } from '@/routers'
 import routesMap from '@/routers/routesMap'
 import { menuTraversal } from '@/utils/index'
+import { setLocalStorage } from '@/utils/storage'
 
 const permissionSlice = createSlice({
   name: 'permission',
@@ -17,8 +18,9 @@ const permissionSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(getMenuAsync.fulfilled, (state, action) => {
       for (let i = 0; i < action.payload.length; i++) {
-        state.asyncRoutes = action.payload[i].children
+        state.asyncRoutes = replaceRoutesComponent(action.payload[i].children)
         state.routes = constantRoutes.concat(replaceRoutesComponent(action.payload[i].children))
+        setLocalStorage('initRoutesList', state.asyncRoutes)
 
         state.menuList = menuTraversal(action.payload[i].children)
       }
@@ -44,6 +46,7 @@ const weightRoutes = route => {
     path: route.path,
     name: route.name,
     redirect: route.redirect,
+    component: route.component,
     element: routesMap[route.component],
     meta: route.meta,
     children: hasChildren ? route.children.map(i => weightRoutes(i)) : []

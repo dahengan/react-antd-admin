@@ -1,16 +1,14 @@
-import { constantRoutes, transformRoutes } from '@/routers'
-import { useRoutes } from 'react-router-dom';
-import { useSelector } from 'react-redux'
-
+import { useRoutes } from 'react-router-dom'
+import { transformRoutes, addRoutes } from '@/routers'
+import useGetMenu from '@/hook/useGetMenu'
+import { getLocalStorage } from '@/utils/storage'
 import './App.scss'
 
 function App() {
 
-  const routes = useSelector(state => {
-    return state.permission.routes
-  })
+  const initRoutesList = useGetMenu(getLocalStorage('initRoutesList')).initRoutesList
 
-  const pages = useRoutes(transformRoutes(routes))
+  const pages = useRoutes(transformRoutes(addRoutes(initRoutesList)))
 
   return (
     <div className="app app-wrapper">

@@ -1,6 +1,6 @@
 import Layout from '@/Layout/index'
 import Auth from './Auth'
-import { lazyLoad } from '@/utils/index'
+import { lazyLoad, isExternal } from '@/utils/index'
 
 export const constantRoutes = [
   {
@@ -13,7 +13,7 @@ export const constantRoutes = [
         path: '/home',
         name: 'Home',
         element: lazyLoad(() => import('@/views/Home')),
-        meta: { title: '首页' },
+        meta: { title: '首页', affix: true },
         hidden: true
       },
       {
@@ -43,22 +43,7 @@ const authLoad = (element, meta = {}, path = '') => {
   )
 }
 
-const weightRoutes = (route, parentPath = '') => {
-  let reg = new RegExp(/^\//)
-  let norouteReg = new RegExp(/^kb-|noroute-/)
-
-  // if (norouteReg.test(route.name)) {
-  //   return
-  // }
-  if (route.component?.name !== 'Layout' && route.component?.name !== 'EmptyLayout') {
-    console.log(route, 'route')
-  } else {
-    if (route.children.length > 0) {
-      const path = reg.test(route.path) ? parentPath + route.path : `${parentPath}/${route.path}`
-      console.log(route, path, 'else')
-    }
-  }
-
+const weightRoutes = route => {
   const hasChildren = route.children && route.children.length > 0
   return {
     path: route.path,
@@ -74,6 +59,54 @@ export const transformRoutes = routes => {
   const list = []
   routes.forEach(route => {
     list.push(weightRoutes(route))
+  })
+  return list
+}
+
+const transRoute = (route, parentPath = '') => {
+  let reg = new RegExp(/^\//)
+  const hasChildren = route.children && route.children.length > 0
+
+  if (route.path === '/') {
+    return route
+  }
+
+  if (route.element?.type?.name !== 'Layout' && route.element?.type?.name !== 'Empty') {
+    const reactMode = route.meta?.reactMode || 1
+    const path =
+      isExternal(route.path) || reactMode === '5'
+        ? route.path
+        : reg.test(route.path)
+        ? route.path
+        : `${parentPath}/${route.path}`
+
+    return {
+      path: path,
+      name: route.name,
+      redirect: route.redirect,
+      element: route.element,
+      meta: route.meta
+    }
+  } else {
+    if (hasChildren) {
+      const path = reg.test(route.path) ? parentPath + route.path : `${parentPath}/${route.path}`
+
+      return {
+        path: path,
+        name: route.name,
+        redirect: route.redirect,
+        element: route.element,
+        meta: route.meta,
+        children: hasChildren ? route.children.map(i => transRoute(i, path)) : []
+      }
+    }
+  }
+}
+
+export const addRoutes = accessRoutes => {
+  const list = []
+  accessRoutes.forEach(route => {
+    list.push(transRoute(route))
   })
   return list
 }
