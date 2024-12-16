@@ -56,22 +56,27 @@ export default function TagsView() {
   }
 
   const toLastView = (path) => {
-    dispatch(delTagListAsync(path)).then(() => {
-      console.log(visitedViews, 'visitedViews');
-      const latestView = visitedViews.slice(-1)[0]
-      if (latestView) {
-        navigate(latestView.path)
-      } else {
-        navigate('/')
-      }
-    })
+    dispatch(delTagListAsync(path))
   }
 
-  console.log(visitedViews, 'visitedViews');
+  const nextNavigate = (tagListArr) => {
+    const latestView = tagListArr.slice(-1)[0]
+    if (latestView) {
+      navigate(latestView.path)
+    } else {
+      navigate('/')
+    }
+  }
 
   useEffect(() => {
     initTags(constantRoutes)
   }, [])
+
+  // 监听tagList，切换路由导航
+  useEffect(() => {
+    nextNavigate(visitedViews)
+  }, [visitedViews])
+
 
   return (
     <div className='TagsView'>

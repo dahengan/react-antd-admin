@@ -43,7 +43,7 @@ const delTagListAsync = createAsyncThunk('delTagListAsync', (path) => {
   })
 })
 
-const { SET_TAGLIST, DEL_TAGLIST } = tagsViewSlice.actions
+const { SET_TAGLIST } = tagsViewSlice.actions
 
 export { SET_TAGLIST, delTagListAsync }
 

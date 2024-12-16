@@ -3,7 +3,6 @@ import { Layout, Menu } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router'
 import { SET_TAGLIST } from '@/store/modules/tagsView'
-import { getRouteDetail } from '@/utils/index'
 import './index.scss'
 
 export default function Sider() {
@@ -54,7 +53,7 @@ export default function Sider() {
     }
     setStateOpenKeys(openKeysArr)
     setSelectedKeys([routePathStr])
-  }, [])
+  }, [routePathStr])
 
   return (
     <Sider className='Layout_Sider' trigger={null} collapsible collapsed={sidebarOpened} >
