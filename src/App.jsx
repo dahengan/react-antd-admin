@@ -6,7 +6,7 @@ import './App.scss'
 
 function App() {
 
-  const initRoutesList = useGetMenu(getLocalStorage('initRoutesList')).initRoutesList
+  const initRoutesList = useGetMenu(getLocalStorage('initRoutesList'))
 
   const pages = useRoutes(transformRoutes(addRoutes(initRoutesList)))
 

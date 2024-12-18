@@ -5,6 +5,8 @@
   background: #fff;
   border-bottom: 1px solid #f0f2f5;
 
+  display: flex;
+  align-items: center;
   position: relative;
 
   .Layout_Header_left_box {
@@ -26,5 +28,10 @@
       font-weight: 700;
       margin-left: 12px;
     }
+  }
+
+  .Layout_Header_right_box {
+    position: absolute;
+    right: 30px;
   }
 }

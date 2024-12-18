@@ -55,6 +55,16 @@ export function isExternal(path) {
 }
 
 function transRouter(route, parentPath = '') {
+  if (!route) {
+    return {
+      path: '',
+      name: '',
+      element: '',
+      meta: { },
+      children: []
+    }
+  }
+  
   let reg = new RegExp(/^\//)
   const hasChildren = route.children && route.children.length > 0
 
@@ -95,7 +105,6 @@ function transRouter(route, parentPath = '') {
 const traverse = (arr, key) => {
   return arr.map(item => {
     if (item.path === key) {
-      console.log(item);
       return item
     } else {
       if (item.children && item.children.length > 0) {

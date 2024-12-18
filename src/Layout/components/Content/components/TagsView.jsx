@@ -6,7 +6,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router'
 import { SET_SIDEBAROPENEND } from '@/store/modules/app'
 import { SET_TAGLIST, delTagListAsync } from '@/store/modules/tagsView'
 import { constantRoutes } from '@/routers'
-import { getRouteDetail } from '@/utils/index'
+import { getRouteDetail } from '@/utils/index' 
 import './TagsView.scss'
 import { CloseOutlined } from '@ant-design/icons';
 
@@ -49,10 +49,12 @@ export default function TagsView() {
     routes.forEach(route => {
       filterAffixTags(route)
     })
-    dispatch(SET_TAGLIST({
-      path: routePathStr.pathname,
-      name: getRouteDetail(routePathStr.pathname)
-    }))
+    if (routePathStr.pathname !== '/') {
+      dispatch(SET_TAGLIST({
+        path: routePathStr.pathname,
+        name: getRouteDetail(routePathStr.pathname)
+      }))
+    }
   }
 
   const toLastView = (path) => {

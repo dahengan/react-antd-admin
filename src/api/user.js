@@ -32,3 +32,11 @@ export function getMenu(params) {
     params
   })
 }
+
+// 获取个人中心基础数据
+export function getPersonalInfo() {
+  return request({
+    url: oam + '/user/myInfo',
+    method: 'get'
+  })
+}

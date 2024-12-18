@@ -1,11 +1,10 @@
-import Layout from '@/Layout/index'
 import Auth from './Auth'
 import { lazyLoad, isExternal } from '@/utils/index'
 
 export const constantRoutes = [
   {
     path: '/',
-    element: <Layout />,
+    element: lazyLoad(() => import('@/Layout/index')),
     redirect: '/home',
     hidden: true,
     children: [
@@ -30,6 +29,7 @@ export const constantRoutes = [
     name: 'Login',
     element: lazyLoad(() => import('@/views/Login')),
     meta: { title: '登录' },
+    children: [],
     hidden: true
   }
 ]

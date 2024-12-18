@@ -7,6 +7,7 @@ import { message } from 'antd'
 
 // 鉴权组件
 export default function Auth(props) {
+  
   const dispatch = useDispatch()
 
   const location = useLocation()
@@ -21,8 +22,6 @@ export default function Auth(props) {
   // 获取动态路由
   const hasAsyncRoutes = useSelector((state) => { return state.permission.asyncRoutes })
 
-
-
   // 设置标题z
   if (meta && meta.title) {
     document.title = meta.title
@@ -30,6 +29,7 @@ export default function Auth(props) {
 
   useEffect(() => {
     // 已登录
+    console.log(hasToken, 'hasToken');
     if (hasToken) {
       // 已登录访问login页面，直接重定向道首页
       if (path === '/login') {

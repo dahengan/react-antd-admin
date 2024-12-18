@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { setToken, removeToken } from '@/utils/auth'
-import { login, getInfo } from '@/api/user'
+import { login } from '@/api/user'
 import JSEncrypt from 'jsencrypt'
 
 // user login

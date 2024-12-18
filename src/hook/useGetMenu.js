@@ -2,8 +2,11 @@ import routesMap from '@/routers/routesMap'
 import { constantRoutes } from '@/routers'
 
 export default function (asyncRoutes) {
-  const list = []
+  if (!asyncRoutes) {
+    return constantRoutes
+  }
 
+  const list = []
   const weightRoutes = route => {
     const hasChildren = route.children && route.children.length > 0
     return {
@@ -15,14 +18,10 @@ export default function (asyncRoutes) {
       children: hasChildren ? route.children.map(i => weightRoutes(i)) : []
     }
   }
-
   asyncRoutes.forEach(item => {
     list.push(weightRoutes(item))
   })
-
   const initRoutesList = constantRoutes.concat(list)
+  return initRoutesList
 
-  return {
-    initRoutesList
-  }
 }
